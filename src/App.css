@@ -1,7 +1,8 @@
+
 #root {
   width: 100%;
-  max-width: 1200px;
-  min-width: 1150px;
+  /* max-width: 1200px; */
+  /* min-width: 1150px; */
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -39,11 +40,7 @@
 
 .GroceriesApp-Container {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-
-  /* max-width: 800px; */
-  /* border: 1px solid white; */
+  padding: 20px;
 }
 
 .CartContainer {
@@ -60,38 +57,20 @@
 
 .CartCard {
   display: flex;
-  /* flex-direction: column; */
   justify-content: space-around;
   align-items: center;
-  /* flex-wrap: wrap; */
-  border: 2px wheat solid;
-  border-radius: 10px;
   margin: 10px;
-  padding: 5px;
-  background-color: rgb(43, 48, 54);
+  padding: 15px;
+  background-color: rgb(39, 38, 48);
+  /* border: 1px solid white; */
+  border: 0.5px solid rgb(73, 72, 72);
+  border-radius: 8px;
 }
 
 .CartCardInfo {
   /* display: flex;
   justify-content: space-around; */
   width: 50%;
-}
-
-.ProductsContainer {
-  width: 75%;
-  max-width: 800px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  /* border: 1px solid white; */
-}
-
-.ProductCard {
-  width: 20%;
-  border: 2px wheat solid;
-  border-radius: 10px;
-  margin: 10px;
-  padding: 5px;
 }
 
 .ProductQuantityDiv {
@@ -150,4 +129,160 @@ img {
 #BuyButton {
   background-color: green;
   width: 50%;
+}
+
+.button-md {
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* My Classes */
+.navSymbol {
+  position: absolute;
+  top: -6px;
+  right: -12px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
+.nav-cart {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 20px;
+  &:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s;
+  }
+}
+
+.product-container-full {
+  margin-top: 21px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.product-container-seventy-five {
+  margin-top: 21px;
+  width: 75%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.product-card {
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  background-color: rgb(56, 50, 82);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cart-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+/* Project 02 styles */
+/* Modal for the Products Form */
+
+.ProductsForm {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(39, 38, 48);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  /* transition: opacity 0.9s ease-in-out; */
+  opacity: 1;
+  min-width: 600px;
+}
+
+/* Overlay to darken the background when the modal is open, it's added to a div in GroceriesAppContainer.jsx before the form */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+}
+.form-group input {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 100%;
+  min-width: 250px;
+}
+
+.form-group select {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 100%;
+  min-width: 250px;
+}
+
+@media (max-width: 600px) {
+  .ProductsForm {
+    min-width: 90%;
+  }
+  .form-group input {
+    min-width: 100%;
+  }
+}
+
+/*  */
+@media (max-width: 1024px) {
+  .product-container-full,
+  .product-container-seventy-five {
+    width: 100%;
+  }
+
+  .GroceriesApp-Container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .CartContainer {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .NavUser {
+    display: none;
+  }
 }

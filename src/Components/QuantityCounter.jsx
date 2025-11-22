@@ -1,19 +1,23 @@
 export default function QuantityCounter({
-  productQuantity,
-  handleAddQuantity,
-  handleRemoveQuantity,
+  quantity,
+  stringQuantity,
+  handleQuantityChange,
   id,
-  mode,
+  collection,
 }) {
   return (
     <div className="ProductQuantityDiv">
-      <div>
-        <button onClick={() => handleRemoveQuantity(id, mode)}>-</button>
-      </div>
-      <p>{productQuantity}</p>
-      <div>
-        <button onClick={() => handleAddQuantity(id, mode)}>+</button>
-      </div>
+      <button onClick={() => 
+        handleQuantityChange(id, -1, collection)}>
+        -
+      </button>
+      <span>
+        {quantity} 
+        {stringQuantity && stringQuantity.split(" ")[1]}
+       
+      </span>
+      <button onClick={() => 
+        handleQuantityChange(id, 1, collection)}>+</button>
     </div>
   );
 }

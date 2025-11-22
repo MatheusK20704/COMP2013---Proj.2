@@ -1,38 +1,28 @@
 import QuantityCounter from "./QuantityCounter";
 
 export default function CartCard({
-  id,
-  image,
-  productName,
-  price,
-  quantity,
+  item,
+  handleQuantityChange,
   handleRemoveFromCart,
-  handleAddQuantity,
-  handleRemoveQuantity,
 }) {
   return (
     <div className="CartCard">
       <div className="CartCardInfo">
-        <img src={image} alt="" />
-        <p>{productName}</p>
-        <p>{price}</p>
+        <img src={item.image} alt={item.productName} />
+        <p>{item.productName}</p>
+        <p> ${item.price}</p>
         <QuantityCounter
-          id={id}
-          productQuantity={quantity}
-          handleAddQuantity={handleAddQuantity}
-          handleRemoveQuantity={handleRemoveQuantity}
-          mode="cart"
+          quantity={item.quantity}
+          handleQuantityChange={handleQuantityChange}
+          id={item.id}
+          collection="cart"
         />
-        {/* <h3>x {quantity}</h3> */}
       </div>
-
-      <div>
-        <h3>
-          Total: ${(parseFloat(price.replace("$", "")) * quantity).toFixed(2)}
-        </h3>
+      <div className="">
+        <h4>Total: ${(item.price * item.quantity).toFixed(2)}</h4>
         <button
-          onClick={() => handleRemoveFromCart(id)}
-          className="RemoveButton"
+          onClick={() => handleRemoveFromCart(item.id)}
+          style={{ backgroundColor: "red" }}
         >
           Remove
         </button>

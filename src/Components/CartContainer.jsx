@@ -1,45 +1,50 @@
 import CartCard from "./CartCard";
+
 export default function CartContainer({
-  cartList,
+  cart,
+  handleQuantityChange,
   handleRemoveFromCart,
-  handleAddQuantity,
-  handleRemoveQuantity,
-  handleClearCart,
+  handleEmptyCart,
+  handleCheckout,
 }) {
+  const totalPrice = cart.reduce(
+    (total, item) => total + item.quantity * item.price,
+    0
+  );
   return (
-    <div className="CartContainer">
-      <h2>Cart items: {cartList.length}</h2>
-      {cartList.length > 0 ? (
+    <div className="CartContainer" id="cart">
+      {cart.length === 0 ? (
+        <p className="">Your cart is empty</p>
+      ) : (
         <>
-          {console.log(cartList)}
-          {cartList.map((product) => (
-            <CartCard
-              key={product.id}
-              {...product}
-              handleRemoveFromCart={handleRemoveFromCart}
-              handleAddQuantity={handleAddQuantity}
-              handleRemoveQuantity={handleRemoveQuantity}
-            />
-          ))}
-          <div className="CartListBtns">
-            <button onClick={() => handleClearCart()} className="RemoveButton">
+          <h2 className="">Cart Items: {cart.length}</h2>
+          <div>
+            {cart.map((item) => {
+              return (
+                <CartCard
+                  key={item.id}
+                  item={item}
+                  handleQuantityChange={handleQuantityChange}
+                  handleRemoveFromCart={handleRemoveFromCart}
+                />
+              );
+            })}
+          </div>
+          <div className="cart-buttons">
+            <button
+              style={{ backgroundColor: "red" }}
+              onClick={handleEmptyCart}
+            >
               Empty Cart
             </button>
-            <button id="BuyButton">
-              Checkout:{" $"}
-              {cartList
-                .reduce(
-                  (total, item) =>
-                    total +
-                    parseFloat(item.price.replace("$", "")) * item.quantity,
-                  0
-                )
-                .toFixed(2)}
+            <button
+              style={{ backgroundColor: "green" }}
+              onClick={handleCheckout}
+            >
+              Checkout: ${totalPrice.toFixed(2)}
             </button>
           </div>
         </>
-      ) : (
-        <h3>No items in cart</h3>
       )}
     </div>
   );

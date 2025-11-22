@@ -4,37 +4,65 @@ export default function ProductCard({
   productName,
   brand,
   image,
+  salesQuantity,
+  quantity,
   price,
-  productQuantity,
-  handleAddQuantity,
-  handleRemoveQuantity,
+  handleQuantityChange,
+  _id: id,
   handleAddToCart,
-  id,
+  inventoryQuantity,
+  handleOnEdit,
+  handleDeleteProduct,
+  
 }) {
   return (
-    <div className="ProductCard">
+    <div className="product-card">
       <h3>{productName}</h3>
-      <img src={image} alt="" />
-      <h4>{brand}</h4>
-      {/* <div className="ProductQuantityDiv">
-        <div onClick={() => handleRemoveQuantity(id)} className="QuantityBtn">
-          <p>➖</p>
-        </div>
-
-        <p>{productQuantity}</p>
-        <div onClick={() => handleAddQuantity(id)} className="QuantityBtn">
-          <p>➕</p>
-        </div>
-      </div> */}
+      <img src={image} alt={productName} />
+      <p>{brand}</p>
       <QuantityCounter
-        handleAddQuantity={handleAddQuantity}
-        productQuantity={productQuantity}
-        handleRemoveQuantity={handleRemoveQuantity}
+        stringQuantity={quantity}
+        quantity={salesQuantity}
+        handleQuantityChange={handleQuantityChange}
         id={id}
-        mode="product"
+        collection="products"
       />
-      <h3>{price}</h3>
+      <p>{price}</p>
+      {/* <p>Total: ${(salesQuantity * priceNumber).toFixed(2)}</p> */}
       <button onClick={() => handleAddToCart(id)}>Add to Cart</button>
+
+      <p style={{ color: inventoryQuantity < 1 ? "red" : "yellow" }}>
+        Available Stock : {inventoryQuantity}
+      </p>
+
+      <div className="cart-buttons">
+        <button
+          className="button-md"
+          style={{
+            backgroundColor: "#8A2BE2",
+            color: "white",
+          }}
+          onClick={() =>
+            handleOnEdit({
+              id,
+              productName,
+              brand,
+              image,
+              price,
+              inventoryQuantity,
+            })
+          }
+        >
+          Update
+        </button>
+        <button
+          className="button-md"
+          style={{ backgroundColor: "red", color: "white" }}
+          onClick={() => handleDeleteProduct(id)}
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 }
